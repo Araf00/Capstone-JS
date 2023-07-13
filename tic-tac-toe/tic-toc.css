@@ -1,0 +1,161 @@
+:root {
+    --cell-size: 100px;
+    --color: rgb(55, 157, 225);
+    --color-set: #a490eb;
+    --l: 10px;
+    --glow-color: #edb1cf;
+    --background-url: url("background.jpg");
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
+
+
+.glow {
+	font-family: 'Satisfy', cursive;
+    font-size: 40px;
+    color: rgb(0, 4, 250);
+    text-align: center;
+    animation: glow 1s ease-in-out infinite alternate;
+    margin-top: 300px;
+}
+
+@keyframes glow {
+    from {
+      text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #4fd610, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+    }
+    to {
+      text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+    }
+    }
+  
+
+body {
+    background-color: #2a00c0;
+	margin: 0;
+	background-image: url("background.jpg");
+    height: 100vh;
+    max-width: 100%;
+    width: 100%;
+}
+.wrap{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.board {
+    width: calc(var(--cell-size) * 5);
+    height: calc(var(--cell-size) * 5);
+    display: grid;
+    grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+    gap: 15px;
+    position: relative;
+    padding: 50px;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: 2px solid #000;
+}
+
+.cell {
+    margin: 30px;
+    width: var(--cell-size);
+    height: var(--cell-size);
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s ease-in-out;
+    background-color: rgba(152, 93, 255, 0.785);
+    box-shadow: 0 0 5px rgba(198, 101, 218, 0.785);
+}
+
+.cell:hover {
+    background-color: #2a00c0;
+    transform: scale(1.05);
+}
+
+.cell.x, .cell.circle {
+    cursor: not-allowed;
+}
+
+
+.board.x .cell:not(.circle):not(.x):hover {
+	background: linear-gradient(to top right, transparent calc(50% - var(--l) / 2), var(--color) calc(50% - var(--l) / 2) calc(50% + var(--l) / 2), transparent calc(50% + var(--l) / 2)),
+				linear-gradient(to bottom right, transparent calc(50% - var(--l) / 2), var(--color) calc(50% - var(--l) / 2) calc(50% + var(--l) / 2), transparent calc(50% + var(--l) / 2));
+	background-size: 80% 80%;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+
+.cell:not(.circle).x {
+	background: linear-gradient(to top right, transparent calc(50% - var(--l) / 2), var(--color-set) calc(50% - var(--l) / 2) calc(50% + var(--l) / 2), transparent calc(50% + var(--l) / 2)),
+				linear-gradient(to bottom right, transparent calc(50% - var(--l) / 2), var(--color-set) calc(50% - var(--l) / 2) calc(50% + var(--l) / 2), transparent calc(50% + var(--l) / 2));
+	background-size: 80% 80%;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+
+
+.board.circle .cell:not(.circle):not(.x):hover {	
+	background: radial-gradient(var(--color) 60%, transparent 60%);
+}
+
+
+.cell:not(.x).circle {
+	background: radial-gradient(var(--color-set) 60%, transparent 60%);
+}
+
+.winning-message {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 5rem;
+    flex-direction: column;
+}
+
+.winning-message button {
+    border-radius: 10px;
+    font-size: 3rem;
+    background-color: var(--glow-color);
+    border: none;
+    padding: .25em .5em;
+    cursor: pointer;
+    color: white;
+    transition: 0.3s ease-in-out;
+    margin-top: 30px;
+}
+
+.winning-message button:hover {
+    transform: scale(1.05);
+}
+
+.winning-message.show {
+    display: flex;
+}
+
+#restartButton {
+    padding: 10px 20px;
+    margin-top: 20px;
+    font-size: 20px;
+    background-color: var(--glow-color);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#restartButton:hover {
+    background-color: #ff3366;
+    transform: scale(1.05);
+}
